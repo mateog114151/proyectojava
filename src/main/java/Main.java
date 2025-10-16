@@ -160,7 +160,6 @@ public class Main {
     private static void editarUsuario() {
         System.out.println("\n═══ EDITAR USUARIO ═══");
         
-        // Listar usuarios primero
         listarUsuarios();
         
         System.out.print("\nIngrese el ID del usuario a editar: ");
@@ -200,7 +199,6 @@ public class Main {
     private static void eliminarUsuario() {
         System.out.println("\n═══ ELIMINAR USUARIO ═══");
         
-        // Listar usuarios primero
         listarUsuarios();
         
         System.out.print("\nIngrese el ID del usuario a eliminar: ");

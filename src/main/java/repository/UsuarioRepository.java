@@ -12,7 +12,6 @@ import model.Usuario;
 
 public class UsuarioRepository {
 
-    /** Insertar usuario a la base de datos */
     public void insertarUsuario(Usuario usuario) {
         String sql = "INSERT INTO usuario (nombre, edad) VALUES (?, ?)";
 
@@ -31,7 +30,6 @@ public class UsuarioRepository {
         }
     }
 
-    /** Listar todos los usuarios */
     public List<Usuario> listarUsuarios() {
         List<Usuario> usuarios = new ArrayList<>();
         String sql = "SELECT id, nombre, edad FROM usuario";
@@ -54,7 +52,6 @@ public class UsuarioRepository {
         return usuarios;
     }
 
-    /** Buscar usuario por ID */
     public Usuario buscarPorId(Integer id) {
         String sql = "SELECT id, nombre, edad FROM usuario WHERE id = ?";
         Usuario usuario = null;
@@ -79,7 +76,6 @@ public class UsuarioRepository {
         return usuario;
     }
 
-    /** Buscar usuarios por nombre (búsqueda parcial) */
     public List<Usuario> buscarPorNombre(String nombre) {
         List<Usuario> usuarios = new ArrayList<>();
         String sql = "SELECT id, nombre, edad FROM usuario WHERE nombre LIKE ?";
@@ -104,7 +100,6 @@ public class UsuarioRepository {
         return usuarios;
     }
 
-    /** Actualizar usuario existente */
     public void actualizarUsuario(Usuario usuario) {
         String sql = "UPDATE usuario SET nombre = ?, edad = ? WHERE id = ?";
 
@@ -129,7 +124,6 @@ public class UsuarioRepository {
         }
     }
 
-    /** Eliminar usuario por ID */
     public void eliminarUsuario(Integer id) {
         String sql = "DELETE FROM usuario WHERE id = ?";
 
@@ -154,16 +148,13 @@ public class UsuarioRepository {
         }
     }
     
-    /** Verificar si la tabla está vacía y resetear el AUTO_INCREMENT */
     private void verificarYResetearAutoIncrement(Connection conn) {
         try {
-            // Contar cuántos usuarios quedan
             String countSql = "SELECT COUNT(*) as total FROM usuario";
             PreparedStatement ps = conn.prepareStatement(countSql);
             ResultSet rs = ps.executeQuery();
             
             if (rs.next() && rs.getInt("total") == 0) {
-                // Si no quedan usuarios, resetear el AUTO_INCREMENT
                 String resetSql = "ALTER TABLE usuario AUTO_INCREMENT = 1";
                 PreparedStatement resetPs = conn.prepareStatement(resetSql);
                 resetPs.execute();
@@ -171,7 +162,6 @@ public class UsuarioRepository {
             }
             
         } catch (Exception e) {
-            // No mostramos error aquí para no confundir al usuario
         }
     }
 }
